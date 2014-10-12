@@ -23,7 +23,7 @@ my_test::my_test() {
     for (int i = 0; i < 20; i++) raw_data.push_back(a);
 }
 
-void my_test::handler(AccelRawData *data, uint32_t num_samples, uint64_t timestamp) {
+static void my_test::handler(AccelRawData *data, uint32_t num_samples, uint64_t timestamp) {
     EXPECT_EQ(...);
 }
 
