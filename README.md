@@ -28,7 +28,7 @@ static void my_test::handler(AccelRawData *data, uint32_t num_samples, uint64_t 
 }
 
 TEST_F(my_test, Demo) {
-    accel_data_subscribe(20, handler);
+    accel_data_subscribe(20, my_test::handler);
     Pebble::accelService << raw_data;
 }
 ```
