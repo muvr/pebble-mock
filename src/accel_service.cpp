@@ -3,6 +3,8 @@
 
 using namespace pebble::mock;
 
+using namespace pebble::mock;
+
 AccelService& AccelService::operator<<(const AccelRawData data) {
     this->raw_data.push_back(data);
     trigger_raw();
@@ -16,13 +18,15 @@ AccelService& AccelService::operator<<(const std::vector <AccelRawData> &data) {
 }
 
 void AccelService::trigger_raw() {
+    bool sent = false;
     for (int i = 0; i < this->raw_data.size() / this->samples_per_update; ++i) {
         std::vector<AccelRawData> update(this->raw_data.begin() + i * this->samples_per_update,
-                                         this->raw_data.begin() + i * this->samples_per_update + this->samples_per_update);
+                this->raw_data.begin() + i * this->samples_per_update + this->samples_per_update);
         this->raw_data_handler(update.data(), (uint32_t) update.size(), 0);
+        sent = true;
     }
 
-    this->raw_data.clear();
+    if (sent) this->raw_data.clear();
 }
 
 void AccelService::accel_raw_data_service_subscribe(uint32_t samples_per_update, AccelRawDataHandler handler) {
@@ -40,4 +44,3 @@ void accel_raw_data_service_subscribe(uint32_t samples_per_update, AccelRawDataH
 }
 
 }
-
