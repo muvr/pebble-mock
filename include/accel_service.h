@@ -14,7 +14,7 @@ namespace mock {
      *
      * Any callbacks will be triggered after pushing the data in.
      */
-    class AccelService {
+    class accel_service {
     private:
     	/** collected raw_data, always reduced to samples_per_update */
         std::vector<AccelRawData> raw_data;
@@ -30,19 +30,14 @@ namespace mock {
     	 * Simulate measurement of AccelRawData as if it came from the 
     	 * Pebble hardware
     	 */
-        AccelService& operator<<(const AccelRawData data);
+        accel_service & operator<<(const AccelRawData data);
 
         /**
          * Simulate measurement of multiple AccelRawData as if they came from the
          * Pebble hardware
          */
-        AccelService& operator<<(const std::vector<AccelRawData> &data);
+        accel_service & operator<<(const std::vector<AccelRawData> &data);
 
-        /**
-         * Mirror of the Pebble Accelerometer API.
-         * Viz http://developer.getpebble.com/2/api-reference/group___accelerometer_service.html and
-         * http://developer.getpebble.com/2/guides/accelerometer.html
-         */
         void accel_data_service_subscribe(uint32_t samples_per_update, AccelDataHandler handler);
         void accel_data_service_unsubscribe();
         void accel_raw_data_service_subscribe(uint32_t samples_per_update, AccelRawDataHandler handler);

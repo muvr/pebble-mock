@@ -2,8 +2,6 @@
 
 using namespace pebble::mock;
 
-AccelService Pebble::accelService;
-
 extern "C" {
 
 void app_log(uint8_t log_level, const char *src_filename, int src_line_number, const char *fmt, ...) {
