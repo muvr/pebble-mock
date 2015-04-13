@@ -1,7 +1,7 @@
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/..)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-FILE(GLOB MainSources *.c *.cpp)
+FILE(GLOB MainSources *.c *.cc)
 
 ADD_LIBRARY(pebble-mock ${MainSources})
 TARGET_LINK_LIBRARIES(pebble-mock gtest ${Boost_LIBRARIES})
