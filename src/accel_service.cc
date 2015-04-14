@@ -1,7 +1,5 @@
 #include "accel_service.h"
-#include "mock.h"
-
-pebble::services::accel_service pebble::instances::accel_service;
+#include "instances.h"
 
 using namespace pebble::services;
 
