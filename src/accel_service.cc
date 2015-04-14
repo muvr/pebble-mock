@@ -1,5 +1,5 @@
 #include "accel_service.h"
-#include "instances.h"
+#include "mocks.h"
 
 using namespace pebble::services;
 
@@ -67,36 +67,35 @@ void accel_service::accel_tap_service_unsubscribe() {
 extern "C" {
 
 void accel_raw_data_service_subscribe(uint32_t samples_per_update, AccelRawDataHandler handler) {
-
-    pebble::instances::accel_service.accel_raw_data_service_subscribe(samples_per_update, handler);
+    pebble::mocks::accel_service()->accel_raw_data_service_subscribe(samples_per_update, handler);
 }
 
 void accel_data_service_subscribe(uint32_t samples_per_update, AccelDataHandler handler) {
-    pebble::instances::accel_service.accel_data_service_subscribe(samples_per_update, handler);
+    pebble::mocks::accel_service()->accel_data_service_subscribe(samples_per_update, handler);
 }
 
 void accel_data_service_unsubscribe() {
-    pebble::instances::accel_service.accel_data_service_unsubscribe();
+    pebble::mocks::accel_service()->accel_data_service_unsubscribe();
 }
 
 int accel_service_peek(AccelData *data) {
-    return pebble::instances::accel_service.accel_service_peek(data);
+    return pebble::mocks::accel_service()->accel_service_peek(data);
 }
 
 int accel_service_set_samples_per_update(uint32_t num_samples) {
-    return pebble::instances::accel_service.accel_service_set_samples_per_update(num_samples);
+    return pebble::mocks::accel_service()->accel_service_set_samples_per_update(num_samples);
 }
 
 int accel_service_set_sampling_rate(AccelSamplingRate rate) {
-    return pebble::instances::accel_service.accel_service_set_sampling_rate(rate);
+    return pebble::mocks::accel_service()->accel_service_set_sampling_rate(rate);
 }
 
 void accel_tap_service_subscribe(AccelTapHandler handler) {
-    pebble::instances::accel_service.accel_tap_service_subscribe(handler);
+    pebble::mocks::accel_service()->accel_tap_service_subscribe(handler);
 }
 
 void accel_tap_service_unsubscribe() {
-    pebble::instances::accel_service.accel_tap_service_unsubscribe();
+    pebble::mocks::accel_service()->accel_tap_service_unsubscribe();
 }
 
 }

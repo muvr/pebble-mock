@@ -1,10 +1,6 @@
-#include "instances.h"
-
-pebble::services::accel_service pebble::instances::accel_service;
-pebble::services::app_messages pebble::instances::app_messages;
-
 extern "C" {
 #include <pebble.h>
+#include <stdarg.h>
 
 void psleep(int millis) {
     // noop

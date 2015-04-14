@@ -70,54 +70,54 @@ dictionary_iterator app_messages::last_dict() const {
 
 // Mirror API
 extern "C" {
-#include "instances.h"
+#include "mocks.h"
 
 AppMessageResult app_message_open(const uint32_t size_inbound, const uint32_t size_outbound) {
-    return pebble::instances::app_messages.app_message_open(size_inbound, size_outbound);
+    return pebble::mocks::app_messages()->app_message_open(size_inbound, size_outbound);
 }
 
 void app_message_deregister_callbacks(void) {
-    pebble::instances::app_messages.app_message_deregister_callbacks();
+    pebble::mocks::app_messages()->app_message_deregister_callbacks();
 }
 
 void *app_message_get_context(void) {
-    return pebble::instances::app_messages.app_message_get_context();
+    return pebble::mocks::app_messages()->app_message_get_context();
 }
 
 void *app_message_set_context(void *context) {
-    return pebble::instances::app_messages.app_message_set_context(context);
+    return pebble::mocks::app_messages()->app_message_set_context(context);
 }
 
 AppMessageInboxReceived app_message_register_inbox_received(AppMessageInboxReceived received_callback) {
-    return pebble::instances::app_messages.app_message_register_inbox_received(received_callback);
+    return pebble::mocks::app_messages()->app_message_register_inbox_received(received_callback);
 }
 
 AppMessageInboxDropped app_message_register_inbox_dropped(AppMessageInboxDropped dropped_callback) {
-    return pebble::instances::app_messages.app_message_register_inbox_dropped(dropped_callback);
+    return pebble::mocks::app_messages()->app_message_register_inbox_dropped(dropped_callback);
 }
 
 AppMessageOutboxSent app_message_register_outbox_sent(AppMessageOutboxSent sent_callback) {
-    return pebble::instances::app_messages.app_message_register_outbox_sent(sent_callback);
+    return pebble::mocks::app_messages()->app_message_register_outbox_sent(sent_callback);
 }
 
 AppMessageOutboxFailed app_message_register_outbox_failed(AppMessageOutboxFailed failed_callback) {
-    return pebble::instances::app_messages.app_message_register_outbox_failed(failed_callback);
+    return pebble::mocks::app_messages()->app_message_register_outbox_failed(failed_callback);
 }
 
 uint32_t app_message_inbox_size_maximum(void) {
-    return pebble::instances::app_messages.app_message_inbox_size_maximum();
+    return pebble::mocks::app_messages()->app_message_inbox_size_maximum();
 }
 
 uint32_t app_message_outbox_size_maximum(void) {
-    return pebble::instances::app_messages.app_message_outbox_size_maximum();
+    return pebble::mocks::app_messages()->app_message_outbox_size_maximum();
 }
 
 AppMessageResult app_message_outbox_begin(DictionaryIterator **iterator) {
-    return pebble::instances::app_messages.app_message_outbox_begin(iterator);
+    return pebble::mocks::app_messages()->app_message_outbox_begin(iterator);
 }
 
 AppMessageResult app_message_outbox_send(void) {
-    return pebble::instances::app_messages.app_message_outbox_send();
+    return pebble::mocks::app_messages()->app_message_outbox_send();
 }
 
 }
