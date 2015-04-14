@@ -1,6 +1,6 @@
 #include "mock.h"
 
-using namespace pebble::mock;
+using namespace pebble;
 
 extern "C" {
 

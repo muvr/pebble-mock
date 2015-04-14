@@ -6,7 +6,7 @@ extern "C" {
 }
 
 namespace pebble {
-namespace mock {
+namespace services {
 
     /**
      * AccelService controls the Pebble AS mocks. Its ``<<`` operators

@@ -3,7 +3,7 @@
 #include <pebble.h>
 
 namespace pebble {
-namespace mock {
+namespace services {
 
     class app_messages {
 

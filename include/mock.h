@@ -3,10 +3,10 @@
 #include "app_messages.h"
 
 namespace pebble {
-namespace mock {
 
-    static accel_service mock_accel_service;
-    static app_messages mock_app_messages;
-}
+    struct instances {
+        static services::accel_service accel_service;
+        static services::app_messages app_messages;
+    };
 
 }

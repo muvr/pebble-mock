@@ -1,7 +1,9 @@
 #include "accel_service.h"
 #include "mock.h"
 
-using namespace pebble::mock;
+pebble::services::accel_service pebble::instances::accel_service;
+
+using namespace pebble::services;
 
 accel_service &accel_service::operator<<(const AccelRawData data) {
     this->raw_data.push_back(data);
@@ -67,35 +69,36 @@ void accel_service::accel_tap_service_unsubscribe() {
 extern "C" {
 
 void accel_raw_data_service_subscribe(uint32_t samples_per_update, AccelRawDataHandler handler) {
-    mock_accel_service.accel_raw_data_service_subscribe(samples_per_update, handler);
+
+    pebble::instances::accel_service.accel_raw_data_service_subscribe(samples_per_update, handler);
 }
 
 void accel_data_service_subscribe(uint32_t samples_per_update, AccelDataHandler handler) {
-    mock_accel_service.accel_data_service_subscribe(samples_per_update, handler);
+    pebble::instances::accel_service.accel_data_service_subscribe(samples_per_update, handler);
 }
 
 void accel_data_service_unsubscribe() {
-    mock_accel_service.accel_data_service_unsubscribe();
+    pebble::instances::accel_service.accel_data_service_unsubscribe();
 }
 
 int accel_service_peek(AccelData *data) {
-    return mock_accel_service.accel_service_peek(data);
+    return pebble::instances::accel_service.accel_service_peek(data);
 }
 
 int accel_service_set_samples_per_update(uint32_t num_samples) {
-    return mock_accel_service.accel_service_set_samples_per_update(num_samples);
+    return pebble::instances::accel_service.accel_service_set_samples_per_update(num_samples);
 }
 
 int accel_service_set_sampling_rate(AccelSamplingRate rate) {
-    return mock_accel_service.accel_service_set_sampling_rate(rate);
+    return pebble::instances::accel_service.accel_service_set_sampling_rate(rate);
 }
 
 void accel_tap_service_subscribe(AccelTapHandler handler) {
-    mock_accel_service.accel_tap_service_subscribe(handler);
+    pebble::instances::accel_service.accel_tap_service_subscribe(handler);
 }
 
 void accel_tap_service_unsubscribe() {
-    mock_accel_service.accel_tap_service_unsubscribe();
+    pebble::instances::accel_service.accel_tap_service_unsubscribe();
 }
 
 }
