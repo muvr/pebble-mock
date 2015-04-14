@@ -18,8 +18,15 @@ namespace services {
         AppMessageOutboxFailed m_failed_callback;
         std::unique_ptr<dictionary_iterator> m_current_dict;
         dictionary_iterator m_last_dict;
+
+        AppMessageResult m_open_result = APP_MSG_OK;
+        AppMessageResult m_outbox_begin_result = APP_MSG_OK;
+        AppMessageResult m_outbox_send_result = APP_MSG_OK;
     public:
         dictionary_iterator last_dict() const;
+        void set_open_result(AppMessageResult open_result);
+        void set_outbox_begin_result(AppMessageResult outbox_begin_result);
+        void set_outbox_send_result(AppMessageResult outbox_send_result);
 
         // App Messages mirror API
         AppMessageResult app_message_open(const uint32_t size_inbound, const uint32_t size_outbound);

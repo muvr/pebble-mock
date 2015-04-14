@@ -3,7 +3,7 @@
 using namespace pebble::services;
 
 AppMessageResult app_messages::app_message_open(const uint32_t, const uint32_t) {
-    return APP_MSG_OK;
+    return m_open_result;
 }
 
 void app_messages::app_message_deregister_callbacks() {
@@ -52,7 +52,7 @@ AppMessageResult app_messages::app_message_outbox_begin(DictionaryIterator **ite
     m_current_dict = std::unique_ptr<dictionary_iterator>(new dictionary_iterator());
     *iterator = reinterpret_cast<DictionaryIterator *>(m_current_dict.get());
 
-    return APP_MSG_OK;
+    return m_outbox_begin_result;
 }
 
 AppMessageResult app_messages::app_message_outbox_send() {
@@ -61,11 +61,23 @@ AppMessageResult app_messages::app_message_outbox_send() {
     m_last_dict = *m_current_dict;
     m_current_dict.release();
 
-    return APP_MSG_OK;
+    return m_outbox_send_result;
 }
 
 dictionary_iterator app_messages::last_dict() const {
     return m_last_dict;
+}
+
+void app_messages::set_outbox_begin_result(AppMessageResult outbox_begin_result) {
+    m_outbox_begin_result = outbox_begin_result;
+}
+
+void app_messages::set_open_result(AppMessageResult open_result) {
+    m_open_result = open_result;
+}
+
+void app_messages::set_outbox_send_result(AppMessageResult outbox_send_result) {
+    m_outbox_send_result = outbox_send_result;
 }
 
 // Mirror API
