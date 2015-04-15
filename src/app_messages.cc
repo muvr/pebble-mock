@@ -58,12 +58,11 @@ AppMessageResult app_messages::app_message_outbox_begin(DictionaryIterator **ite
 
 AppMessageResult app_messages::app_message_outbox_send() {
     if (!m_current_dict) return APP_MSG_CLOSED;
-    if (m_outbox_send_result != APP_MSG_OK) return m_outbox_send_result;
+    if (m_outbox_send_result == APP_MSG_OK) m_dicts.push_back(*m_current_dict);
 
-    m_dicts.push_back(*m_current_dict);
     m_current_dict.release();
 
-    return APP_MSG_OK;
+    return m_outbox_send_result;
 }
 
 dictionary_iterator &app_messages::last_dict() {
