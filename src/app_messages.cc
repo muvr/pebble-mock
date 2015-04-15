@@ -48,6 +48,7 @@ uint32_t app_messages::app_message_inbox_size_maximum() {
 
 AppMessageResult app_messages::app_message_outbox_begin(DictionaryIterator **iterator) {
     if (m_current_dict) return APP_MSG_BUSY;
+    if (m_outbox_begin_result != APP_MSG_OK) return m_outbox_begin_result;
 
     m_current_dict = std::unique_ptr<dictionary_iterator>(new dictionary_iterator());
     *iterator = reinterpret_cast<DictionaryIterator *>(m_current_dict.get());
@@ -57,15 +58,20 @@ AppMessageResult app_messages::app_message_outbox_begin(DictionaryIterator **ite
 
 AppMessageResult app_messages::app_message_outbox_send() {
     if (!m_current_dict) return APP_MSG_CLOSED;
+    if (m_outbox_send_result != APP_MSG_OK) return m_outbox_send_result;
 
-    m_last_dict = *m_current_dict;
+    m_dicts.push_back(*m_current_dict);
     m_current_dict.release();
 
-    return m_outbox_send_result;
+    return APP_MSG_OK;
 }
 
-dictionary_iterator app_messages::last_dict() const {
-    return m_last_dict;
+dictionary_iterator &app_messages::last_dict() {
+    return m_dicts.back();
+}
+
+std::vector<dictionary_iterator>& app_messages::dicts() {
+    return m_dicts;
 }
 
 void app_messages::set_outbox_begin_result(AppMessageResult outbox_begin_result) {

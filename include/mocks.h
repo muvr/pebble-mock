@@ -12,7 +12,7 @@ namespace pebble {
         static std::shared_ptr<services::accel_service> accel_service();
         static std::shared_ptr<services::app_messages> app_messages();
 
-        void reset();
+        static void reset();
     };
 
 }

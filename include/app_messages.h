@@ -17,13 +17,14 @@ namespace services {
         AppMessageOutboxSent m_sent_callback;
         AppMessageOutboxFailed m_failed_callback;
         std::unique_ptr<dictionary_iterator> m_current_dict;
-        dictionary_iterator m_last_dict;
+        std::vector<dictionary_iterator> m_dicts;
 
         AppMessageResult m_open_result = APP_MSG_OK;
         AppMessageResult m_outbox_begin_result = APP_MSG_OK;
         AppMessageResult m_outbox_send_result = APP_MSG_OK;
     public:
-        dictionary_iterator last_dict() const;
+        dictionary_iterator &last_dict();
+        std::vector<dictionary_iterator> &dicts();
         void set_open_result(AppMessageResult open_result);
         void set_outbox_begin_result(AppMessageResult outbox_begin_result);
         void set_outbox_send_result(AppMessageResult outbox_send_result);
