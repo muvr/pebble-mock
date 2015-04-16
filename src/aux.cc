@@ -17,7 +17,7 @@ void app_log(uint8_t log_level, const char *src_filename, int src_line_number, c
     std::vsprintf(buffer, fmt, args);
     va_end(args);
 
-    std::cout << std::string(buffer) << std::flush;
+    std::cout << std::string(buffer) << std::endl;
 }
 
 }
