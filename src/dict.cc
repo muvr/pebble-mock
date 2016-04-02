@@ -44,6 +44,11 @@ DictionaryResult dict_write_int8(DictionaryIterator *iter, const uint32_t key, c
     return di->write_int(key, value);
 }
 
+DictionaryResult dict_write_int32(DictionaryIterator *iter, const uint32_t key, const int32_t value) {
+    dictionary_iterator *di = reinterpret_cast<dictionary_iterator *>(iter);
+    return di->write_int(key, value);
+}
+
 uint32_t dict_write_end(DictionaryIterator *iter) {
     return 0;
 }

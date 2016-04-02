@@ -4,23 +4,23 @@
 using namespace pebble::services;
 
 accel_service &accel_service::operator<<(const AccelRawData data) {
-    this->raw_data.push_back(data);
+    raw_data.push_back(data);
     trigger_raw();
     return *this;
 }
 
 accel_service &accel_service::operator<<(const std::vector <AccelRawData> &data) {
-    this->raw_data.insert(this->raw_data.end(), data.begin(), data.end());
+    raw_data.insert(this->raw_data.end(), data.begin(), data.end());
     trigger_raw();
     return *this;
 }
 
 void accel_service::trigger_raw() {
     bool sent = false;
-    for (int i = 0; i < this->raw_data.size() / this->samples_per_update; ++i) {
-        std::vector<AccelRawData> update(this->raw_data.begin() + i * this->samples_per_update,
-                this->raw_data.begin() + i * this->samples_per_update + this->samples_per_update);
-        this->raw_data_handler(update.data(), (uint32_t) update.size(), 0);
+    for (int i = 0; i < raw_data.size() / samples_per_update; ++i) {
+        std::vector<AccelRawData> update(raw_data.begin() + i * samples_per_update,
+                raw_data.begin() + i * samples_per_update + samples_per_update);
+        raw_data_handler(update.data(), (uint32_t) update.size(), 0);
         sent = true;
     }
 
